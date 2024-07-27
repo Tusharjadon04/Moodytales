@@ -1,5 +1,5 @@
 const express=require("express");
-const { Createuser, loginUser, Getuser, Deleteuser, Updateuser, modelAi } = require("../Middleware/Moodytales");
+const { loginUser, Getuser, Deleteuser, Updateuser, modelAi, Createuser } = require("../Middleware/Moodytales");
 const Moodyroute = express.Router()
 const AIroute= express.Router()
 
@@ -10,6 +10,4 @@ Moodyroute.post("/Deletemoddy/:id",Deleteuser)
 Moodyroute.get("/Updatemoddy",Updateuser)
 
 AIroute.post("/AIdata",modelAi)
-
-module.exports=Moodyroute;
-module.exports=AIroute;
+module.exports=Moodyroute

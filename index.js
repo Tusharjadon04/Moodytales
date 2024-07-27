@@ -4,11 +4,11 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const Moodyroute = require("./Routes/Moddyroutes");
+
 const AIroute = require("./Routes/Moddyroutes");
 const Bookroutes = require("./Routes/BookRoutes");
 const AdminRoute = require("./Routes/Adminroutes");
- 
+const Moodyroute = require("./Routes/Moddyroutes");
 
 
 
@@ -22,10 +22,11 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(Moodyroute);
 app.use(AIroute);
 app.use(AdminRoute)
 app.use(Bookroutes)
+app.use(Moodyroute)
+
 
 
 app.listen(process.env.PORT, () => {
