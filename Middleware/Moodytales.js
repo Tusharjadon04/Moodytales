@@ -1,6 +1,6 @@
 const { response } = require("express");
 const Moddy = require("../Models/Moodyschema");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const validator = require("validator");
 const nodemailer=require("nodemailer");
 var jwt = require('jsonwebtoken');
