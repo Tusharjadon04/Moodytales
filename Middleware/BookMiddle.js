@@ -4,36 +4,39 @@ const { adminverifytoken } = require("./Adminjwtverify");
 
 
 exports.Addbook = async (req, res) => {
-    const { bookname,price, title, description, image, author, publishdate} = req.body;
+    const { bookname, price, title, description, image, author, publishdate } = req.body;
     console.log(bookname);
     try {
         const newBook = await Book.create({
-            bookname:bookname,
-            price:price,
-            title:title,
-            description:description,
-            image:image,
-            author:author,
-            publishdate:new Date('2024-07-27T10:00:00')
+            bookname: bookname,
+            price: price,
+            title: title,
+            description: description,
+            image: image,
+            author: author,
+            publishdate: new Date('2024-07-27T10:00:00')
 
-    })
-    return res.status(201).json({response:newBook});
+        })
+        return res.status(201).json({ response: newBook });
     } catch (error) {
         return res.status(401).json({ message: error.message });
     }
 };
 
 exports.GetBook = async (req, res) => {
-    const { id } = req.params; 
-    console.log(id);
+    const id = req.params.id;
+    console.log('Requested ID:', id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: 'Invalid ObjectId format' });
+    }
     try {
         const data = await Book.findById(id);
         if (!data) {
-            return res.status(404).json({ message: error.message});
+            return res.status(404).json({ message: 'Book not found' });
         }
-        return res.status(200).json(data); 
+        return res.status(200).json(data);
     } catch (error) {
-        return res.status(500).json({ message: error.message }); 
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -67,13 +70,13 @@ exports.UpdateBook = async (req, res) => {
         const updatedBook = await Book.findByIdAndUpdate(
             id,
             {
-                bookname:bookname,
-                price:price,
-                title:title,
-                description:description,
-                image:image,
-                author:author,
-                publishdate: new Date ('2024-07-27T10:00:00'),
+                bookname: bookname,
+                price: price,
+                title: title,
+                description: description,
+                image: image,
+                author: author,
+                publishdate: new Date('2024-07-27T10:00:00'),
             },
         );
 
