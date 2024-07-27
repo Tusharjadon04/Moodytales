@@ -1,0 +1,5 @@
+1. The email must start with one or more characters from the set: lowercase letters, uppercase letters, digits, dots, underscores, percent signs, plus signs, or hyphens.
+2. It must include a single @ character.
+3. After the @, it must have one or more characters from the set: lowercase letters, uppercase letters, digits, dots, or hyphens.
+4. This must be followed by a literal dot (.).
+5. Finally, it must end with at least two or more characters that are either lowercase or uppercase letters.
