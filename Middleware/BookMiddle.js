@@ -6,7 +6,6 @@ const mongoose= require("mongoose")
 
 exports.Addbook = async (req, res) => {
     const { bookname, price, title, description, image, author, publishdate } = req.body;
-    console.log(bookname);
     try {
         const newBook = await Book.create({
             bookname: bookname,

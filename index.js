@@ -5,10 +5,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 
-const AIroute = require("./Routes/Moddyroutes");
 const Bookroutes = require("./Routes/BookRoutes");
 const AdminRoute = require("./Routes/Adminroutes");
+
+const AIroute = require("./Routes/AIroutes");
 const Moodyroute = require("./Routes/Moddyroutes");
+
+
 
 
 
@@ -22,10 +25,11 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(AIroute);
+app.use(AIroute)
 app.use(AdminRoute)
 app.use(Bookroutes)
 app.use(Moodyroute)
+
 
 
 

@@ -3,7 +3,7 @@ const Admin = require("../Models/Adminschema");
 const jwt = require('jsonwebtoken');
 
 
-exports.CreateAdmin = async (req, res) => {
+exports.CreateAdmin = async (req, res,next) => {
     const { Email, Password } = req.body;
     console.log(Email);
     try {
@@ -14,6 +14,10 @@ exports.CreateAdmin = async (req, res) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(Email)) {
             return res.status(401).json({ message: "Use valid email format" });
+        }
+        const paswordregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+        if (!paswordregex.test(Password)) {
+            return res.status(502).json({ Message: "use correct format of password" })
         }
         const hashedPassword = await bcrypt.hash(Password, 10);
         const newAdmin = new Admin({
@@ -35,7 +39,7 @@ exports.LoginAdmin = async (req, res) => {
         const existinguser = await Admin.findOne({ Email: Email });
         if (existinguser) {
             const pass = existinguser.Password;
-            const check = await bcrypt.compare(Password, pass); 
+            const check = await bcrypt.compare(Password, pass);
             if (check) {
                 const token = jwt.sign({ existinguser }, "Adminkisecretkeysekarega", { expiresIn: '8h' });
                 return res.status(200).json({ message: "User sign in success", token });
