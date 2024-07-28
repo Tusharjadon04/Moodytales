@@ -2,7 +2,6 @@ const { response } = require("express");
 const Moddy = require("../Models/Moodyschema");
 const bcrypt = require("bcryptjs")
 const validator = require("validator");
-const nodemailer=require("nodemailer");
 var jwt = require('jsonwebtoken');
 const { verifytoken }= require ('../jwtverify');
 require('dotenv').config()
@@ -142,23 +141,4 @@ exports.Updateuser = async (req,res)=> {
     }
 }
 
-exports.forgetpassword = async(req,res)=>{
-    const {  Email } = req.body;
-    const isEmailvalidate = validator.isEmail(Email);
-    if (!isEmailvalidate) {
-        return res.status(500).json({ message: "use email format " })
-    }
-    const Token = req.headers.authorization
-    if(!Token){
-        return res.status(501).json({message:"plzz provide the token to forget it"})
-    }
-    try {
-        const existingUser = await Moddy.findOne({ Email: Email });
-        if (!existingUser) {
-            return res.status(500).json({ message: "user not found" })
-        }
-    } catch (error) {
-        
-    }
-}
 
